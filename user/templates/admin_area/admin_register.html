@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/admin_css/navbar.css">
+    <link rel="stylesheet" href="/static/css/admin_css/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script type="text/javascript" src="https://unpkg.com/@speechly/browser-ui/core/push-to-talk-button.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@speechly/browser-ui/core/big-transcript.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@speechly/browser-ui/core/intro-popup.js"></script>
+    </head>
+      <body >
+        <!--------------------navbar start here-------------------------------------->
+<push-to-talk-button appid="ad2f6fa7-f0a5-4f01-843b-2cff898fb5f3" capturekey=" " placement="bottom"></push-to-talk-button>
+  <big-transcript placement="top"></big-transcript>
+  <intro-popup></intro-popup>
+  <nav >
+    <div class="logo"> <a href='/admin_product'>Artistaan</a></div>
+    <input type="checkbox" id="click">
+    <label for="click" class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </label>
+    <ul>
+      {% if request.session.admin_email %}
+      <li><a href="/logout">Logout </a></li>
+      {% else %}
+      <li><a  href="/admin_login">Login</a></li>
+      {% endif %}
+      <li><a  href="/admin_product">Products</a></li>
+      <li><a  href="/admin_profile">Profile</a></li>
+      
+      <li><a href="/admin_order">Orders</a></li>
+      
+    </ul>
+  </nav>
+   <!--------------------navbar ends here-------------------------------------->
+    <div class="body">
+     <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form action="/admin_register/" method="POST" onsubmit=" return validateAdmin()">
+        {% csrf_token %}
+        <h2 style="color:red">{{error}}<h2>
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" placeholder="Enter your name" name="name" id="name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="email" placeholder="Enter your email" name="email" id="email_address" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your number" name="phone_number" id="phone_number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="password" placeholder="Enter your password" name="pass" id="password" required>
+          </div>
+          
+          <div class="input-box">
+            <span class="details">GSTIN NO</span>
+            <input type="text" placeholder="GSTIN" name="gst" id="gst" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Address</span>
+            <textarea  rows="4" cols="45" name="address" id="street_address"></textarea>
+          </div>
+      
+        </div>
+        
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+    <div class="loginButton"><i>Already Registered</i> <a href='/admin_login/'><button>Login </button></a> </div>
+  </div>
+</div>
+<script src="../static/js/speech.js"></script>
+<script src="../static/js/validate_admin.js"></script>
+</body>
+</html>
