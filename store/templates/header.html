@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/product.css">
+    <link rel="stylesheet" href="/static/css/index_page.css">
+    <link rel="stylesheet" href="/static/css/product_desc.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/shop.css">
+    <link rel="stylesheet" href="/static/css/cart.css">
+    <link rel="stylesheet" href="/static/css/checkout.css">
+    <link rel="stylesheet" href="/static/css/profile.css">
+    
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <title>Artistan</title>
+  </head>
+  <body >
+        <!--------------------navbar start here-------------------------------------->
+
+    <nav >
+      <div class="logo">Artistaan</div>
+      <input type="checkbox" id="click">
+      <label for="click" class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <ul>
+        {% if request.session.customer_email %}
+        <li><a href="/logout">Logout </a></li>
+        {% else %}
+        <li><a  href="/registration">Register</a></li>
+        {% endif %}
+        <li><a  href="/shop">Shop</a></li>
+        <li><a  href="/">Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <li><a  href="/cart">Cart</a></li>
+      </ul>
+    </nav>
+     <!--------------------navbar ends here-------------------------------------->
+

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/static/css/navbar.css">
+    <link rel="stylesheet" href="/static/css/register.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
+    <script type="text/javascript" src="https://unpkg.com/@speechly/browser-ui/core/push-to-talk-button.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@speechly/browser-ui/core/big-transcript.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/@speechly/browser-ui/core/intro-popup.js"></script>
+    </head>
+      <body >
+        <!--------------------navbar start here-------------------------------------->
+<push-to-talk-button appid="3c97476a-7065-427c-b0fb-2aa88f9e9dc2" capturekey=" " placement="bottom"></push-to-talk-button>
+  <big-transcript placement="top"></big-transcript>
+  <intro-popup></intro-popup>
+    <nav >
+      <div class="logo">Artistaan</div>
+      <input type="checkbox" id="click">
+      <label for="click" class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <ul>
+        <li><a  href="/registration">Register</a></li>
+        <li><a  href="/shop">Products</a></li>
+        <li><a  href="/">Categories</a></li>
+        <li><a href="/profile">Orders</a></li>
+        <li><a href="#">Logout </a></li>
+      </ul>
+    </nav>
+     <!--------------------navbar ends here-------------------------------------->
+    <div class="body">
+     <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+      <form action="/registration/" method="POST">
+        {% csrf_token %}
+        <h2 style="color:red">{{error}}<h2>
+        <div class="user-details">
+          <div class="input-box">
+            <span class="details">Full Name</span>
+            <input type="text" placeholder="Enter your name" name="name" id="name" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Username</span>
+            <input type="text" placeholder="Enter your username" name="uname" id="uname" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Email</span>
+            <input type="text" placeholder="Enter your email" name="email" id="email_address" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Phone Number</span>
+            <input type="text" placeholder="Enter your number" name="phone_number" id="phone_number" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Password</span>
+            <input type="text" placeholder="Enter your password" name="pass" id="password" required>
+          </div>
+          <div class="input-box">
+            <span class="details">Confirm Password</span>
+            <input type="text" placeholder="Confirm your password" name="c_pass" id="password"required>
+          </div>
+          <div class="input-box">
+            <span class="details">Address</span>
+            <textarea  rows="4" cols="45" name="address" id="street_address"></textarea>
+          </div>
+        
+        <div class="input-box">
+            <span class="details">Pin Code</span>
+            <input type="text" placeholder="Enter pin code" name="pin" id="pin_code" required>
+          </div>
+        </div>
+        
+        <div class="button">
+          <input type="submit" value="Register">
+        </div>
+      </form>
+    </div>
+    <div class="loginButton"><i>Already Registered</i> <button><a href='/login/'>Login</a></button> </div>
+  </div>
+</div>
+<script src="../static/js/speech.js"></script>
+</body>
+</html>
