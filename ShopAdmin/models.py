@@ -77,6 +77,7 @@ class Order(models.Model):
     quantity=models.IntegerField(default=1)
     price=models.IntegerField()
     date=models.DateField(default=datetime.datetime.today)
+    delivery_date=models.DateField(null=True,blank=True)
     address=models.CharField(max_length=100,default='',blank=True)
     phone=models.CharField(max_length=15,default='',blank=True)
     paymentMethod=models.CharField(max_length=20,default='',blank=True)
@@ -88,7 +89,7 @@ class Order(models.Model):
 
     @staticmethod
     def get_all_order_of_admin(mail):
-        return Order.objects.filter(manufacturer=mail)
+        return reversed(Order.objects.filter(manufacturer=mail))
 
     def deleteorder(id):
         record = Order.objects.get(id = id)

@@ -1,21 +1,40 @@
 {% include 'header.html' %}
 {% load cart %}
+<script>
+    function validateDate() {
+        inputDate = document.getElementById('del_date').value;
+        alert(inputDate);
+        enterdate = new Date(inputDate).getDate();
+        curr = new Date().getDate();
+        if (enterdate - curr <= 3) {
+            alert("Delivery date be more than 3 day more than current date");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 
+</script>
 <div class='address-card'>
-    <div class='address-top'><p>Address :</p></div>
+    <div class='address-top'>
+        <p>Address :</p>
+    </div>
     <div class='address-bottom'>
-    <p> {{addr}}</p>
+        <p> {{addr}}</p>
     </div>
 </div>
 
-<div class='item-top'><p>Item Description :</p></div>
+<div class='item-top'>
+    <p>Item Description :</p>
+</div>
 <div class="right-bar" id='item-description'>
-    <p><span>Name of Product</span>  <span> {% for item in carts %} {{item.name}}, {% endfor %}</span></p>
+    <p><span>Name of Product</span> <span> {% for item in carts %} {{item.name}}, {% endfor %}</span></p>
     <hr>
-    <p><span>Quantitys </span> <span>{% for item in carts %}  {{item|cart_quantity:request.session.cart}}, {% endfor %}</span> </p>
+    <p><span>Quantitys </span> <span>{% for item in carts %} {{item|cart_quantity:request.session.cart}}, {% endfor %}</span> </p>
 
     <hr>
-    <p><span>Price</span> <span>{% for item in carts %}  Rs.{{item.price}},  {% endfor %}</span></p>
+    <p><span>Price</span> <span>{% for item in carts %} Rs.{{item.price}}, {% endfor %}</span></p>
 
     <hr>
     <p><span>Shipping</span> <span>Rs . 00</span></p>
@@ -24,22 +43,29 @@
 </div>
 
 <div class='payment-method'>
-    <div class='payment-top'><p>Select Payment Method :</p></div>
+    <div class='payment-top'>
+        <p>Select Payment Method :</p>
+    </div>
     <div class='payment-bottom'>
-    <form action="/place_order/" method='POST'>
-        {% csrf_token %}
-        <div class='method1'>
-            <lebel for='cod'>Cash On Delivery</lebel>
-            <input type='radio' name='payment-method' id='cod' value='Cash On Delivery' checked >
-        
-        </div>
-        
-        <div class='form-btn'>
-            <a href='/cart' > Go back to cart</a>
-        <button type='submit' id='order-button'> Order </button>
-        </div> 
-    </form>
-</div>
+        <form action="/place_order/" method='POST' onsubmit=" return validateDate()">
+            {% csrf_token %}
+            <div class='method1'>
+                <lebel for='cod'>Cash On Delivery</lebel>
+                <input type='radio' name='payment-method' id='cod' value='Cash On Delivery' checked>
+            </div>
+            <div>
+                <p style="color:#1b1b1b; font-size: 20px; font-weight: bold; margin-bottom: 1vh;">Select Date of
+                    Delivery
+                </p><input id="del_date" name="dateOfDelivery" style="width:20vw;" type="date">
+            </div>
+
+            <div class='form-btn'>
+                <a href='/cart'> Go back to cart</a>
+                <button type='submit' id='order-button'> Order </button>
+            </div>
+        </form>
+    </div>
 </div>
 </body>
+
 </html>

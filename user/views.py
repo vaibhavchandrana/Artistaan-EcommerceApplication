@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from ShopAdmin.models import Category, Product,Admin,Order
 from .models import Customer,UserOrder
 from django.contrib.auth.hashers import make_password,check_password
+from django.conf import settings
 # Create your views here.
 def index(request):
     products=Product.get_all_products()
@@ -120,7 +121,7 @@ def shop(request):
 
 
 def profile(request):
-    if request.session.get('customer_id'):
+    if request.session.get('customer_id') and request.method=='GET' :
         email=request.session.get('customer_email')
         user=Customer.get_user_by_email(email=email)
         print(user)
@@ -247,15 +248,18 @@ def saveOrder(request):
         customer1=Customer.get_by_id(c_id)
         addr=customer1[0].address
         ph=customer1[0].phone
+        del_date=request.POST.get('dateOfDelivery')
+        print(del_date)
         products=Product.get_all_products_by_ids(list(cart))
+        
         for p in products:
             order=UserOrder(customer=Customer(id=c_id),productName=p.name,
-            productimg=p.img1,quantity=cart.get(str(p.id)),price=p.price,)
-
+            productimg=p.img1,quantity=cart.get(str(p.id)),price=p.price,delivery_date=del_date)
             order.UserPlaceOrder()
+             
 
             Aorder=Order(product=p,customer=Customer(id=c_id),quantity=cart.get(str(p.id)),
-                     price=p.price,address=addr,phone=ph,paymentMethod=payment_method,manufacturer=p.manufacturer,status="Pending")
+                     price=p.price,address=addr,phone=ph,paymentMethod=payment_method,manufacturer=p.manufacturer,status="Pending",delivery_date=del_date)
             Aorder.saveOrder()
 
         request.session['cart']={}

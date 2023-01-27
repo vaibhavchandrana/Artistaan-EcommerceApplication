@@ -39,12 +39,13 @@ class UserOrder(models.Model):
     quantity=models.IntegerField(default=1)
     price=models.IntegerField()
     order_date=models.DateField(default=datetime.datetime.today)
+    delivery_date=models.DateField(null=True,blank=True)
    
     def UserPlaceOrder(self):
         self.save()
 
     def get_all_order():
-        return UserOrder.objects.all()
+        return reversed(UserOrder.objects.all())
     
     def deleteorder(id):
         record = UserOrder.objects.get(id = id)
